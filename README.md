@@ -1,5 +1,5 @@
 # Hysteria2-Iran
-### Hysteria2 running on sing-box for bypassing internet censorship in Iran with TLS encryption.
+### Hysteria2 running on sing-box for bypassing internet censorship in Iran.
 
 DISCLAIMER: This Guide is machine translated.
 
