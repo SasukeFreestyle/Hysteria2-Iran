@@ -107,7 +107,8 @@ tar -xzf sing-box-1.5.0-beta.11-linux-amd64.tar.gz --strip-components=1 sing-box
 کلیدهای OpenSSL را برای فایل پیکربندی ایجاد کنید. این فایل‌ها را بعداً استفاده می‌کنیم.
 ```
 openssl ecparam -genkey -name prime256v1 -out ca.key
-
+```
+```
 openssl req -new -x509 -days 36500 -key ca.key -out ca.crt -subj "/CN=google-analytics.com"
 ```
 ## نصب سرویس Sing-box
