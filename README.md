@@ -95,7 +95,7 @@ cd hy2/
 
 https://github.com/SagerNet/sing-box/tags
 
-در زمان نوشتن این متن، نسخه‌ی 1.5.0-beta.11 موجود است. برای دانلود فایل tar.gz مناسب برای سیستم خود، معمولاً نسخه‌ی linux-amd64 مناسب است. برای دانلود آن، از دستور wget استفاده خواهیم کرد.
+در زمان نوشتن این متن، نسخه‌ی 1.5.0-beta.12 موجود است. برای دانلود فایل tar.gz مناسب برای سیستم خود، معمولاً نسخه‌ی linux-amd64 مناسب است. برای دانلود آن، از دستور wget استفاده خواهیم کرد.
 
 ```
 wget https://github.com/SagerNet/sing-box/releases/download/v1.5.0-beta.12/sing-box-1.5.0-beta.12-linux-amd64.tar.gz
