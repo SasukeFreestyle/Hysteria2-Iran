@@ -1,6 +1,6 @@
 {
    "log":{
-      "level":"fatal",
+      "level":"info",
       "timestamp":true
    },
    "experimental":{
@@ -14,7 +14,7 @@
          "tag":"hy2-in-443",
          "listen":"::",
          "udp_timeout":180,
-         "listen_port":81,
+         "listen_port":443,
          "sniff":true,
          "sniff_override_destination":true,
          "domain_strategy":"prefer_ipv4",
@@ -94,9 +94,9 @@
                "dt.beyla.site",
                "beyla.site",
                "intrack.ir",
-	           "divar.ir",
-	           "dbankcloud.asia",
-	           "pullcm.com",
+	       "divar.ir",
+	       "dbankcloud.asia",
+	       "pullcm.com",
                "pullcf.com",
                "intrack.io"
             ]
