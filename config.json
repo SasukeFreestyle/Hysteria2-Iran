@@ -13,7 +13,6 @@
       {
          "tag":"hy2-in",
          "type":"hysteria2",
-         "listen":"192.168.3.14",
          "listen":"::",
          "udp_timeout":180,
          "up_mbps":0,
