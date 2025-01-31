@@ -5,19 +5,17 @@
    },
    "experimental":{
       "cache_file":{
-         "enabled":true
+         "enabled":true,
+         "path":"/home/USERNAME/hy2/cache.db"
       }
    },
    "inbounds":[
       {
+         "tag":"hy2-in",
          "type":"hysteria2",
-         "tag":"hy2-in-443",
+         "listen":"192.168.3.14",
          "listen":"::",
          "udp_timeout":180,
-         "listen_port":443,
-         "sniff":true,
-         "sniff_override_destination":true,
-         "domain_strategy":"prefer_ipv4",
          "up_mbps":0,
          "down_mbps":0,
          "obfs":{
@@ -38,28 +36,13 @@
          }
       }
    ],
-   "outbounds":[
-      {
-         "type":"direct",
-         "tag":"direct"
-      },
-      {
-         "type":"block",
-         "tag":"block"
-      },
-      {
-         "type":"dns",
-         "tag":"dns-out"
-      }
-   ],
    "dns":{
-	  "disable_cache":true,
+      "disable_cache":true,
       "servers":[
          {
-            "tag":"dns-out",
-            "address":"https://1.1.1.1/dns-query",
+            "tag":"DNS",
+            "address":"local",
             "address_strategy":"prefer_ipv4",
-            "strategy":"prefer_ipv4",
             "detour":"direct"
          }
       ]
@@ -67,12 +50,32 @@
    "route":{
       "rules":[
          {
-            "ip_is_private":true,
-            "outbound":"block"
+            "inbound":"hy2-in",
+            "action":"sniff"
          },
          {
+            "action":"reject",
+            "protocol":[
+               "bittorrent",
+               "dtls"
+            ]
+         },
+         {
+            "inbound":"hy2-in",
+            "action":"resolve",
+            "strategy":"prefer_ipv4",
+            "server":"DNS"
+         },
+         {
+            "ip_is_private":true,
+            "action":"reject"
+         },
+         {
+            "action":"reject",
             "rule_set":[
+               "geoip-cn",
                "geoip-ir",
+               "geoip-ru",
                "geoip-phishing",
                "geoip-malware",
                "geoip-private",
@@ -80,29 +83,31 @@
                "geosite-malware",
                "geosite-cryptominers",
                "geosite-phishing"
-            ],
-            "outbound":"block"
+            ]
          },
          {
-            "protocol":"dns",
-            "outbound":"dns-out"
-         },
-         {
-            "outbound":"block",
+            "action":"reject",
             "domain_suffix":[
                "web.bale.ir",
                "dt.beyla.site",
                "beyla.site",
                "intrack.ir",
-	       "divar.ir",
-	       "dbankcloud.asia",
-	       "pullcm.com",
+               "divar.ir",
+               "dbankcloud.asia",
+               "pullcm.com",
                "pullcf.com",
                "intrack.io"
             ]
          }
       ],
       "rule_set":[
+         {
+            "tag":"geoip-cn",
+            "type":"remote",
+            "format":"binary",
+            "update_interval":"3d",
+            "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-cn.srs"
+         },
          {
             "tag":"geoip-ir",
             "type":"remote",
@@ -111,11 +116,11 @@
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs"
          },
          {
-            "tag":"geoip-private",
+            "tag":"geoip-ru",
             "type":"remote",
             "format":"binary",
             "update_interval":"3d",
-            "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-private.srs"
+            "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ru.srs"
          },
          {
             "tag":"geosite-ir",
@@ -153,13 +158,25 @@
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-malware.srs"
          },
          {
+            "tag":"geoip-private",
+            "type":"remote",
+            "format":"binary",
+            "update_interval":"3d",
+            "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-private.srs"
+         },
+         {
             "tag":"geosite-cryptominers",
             "type":"remote",
             "format":"binary",
             "update_interval":"3d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-cryptominers.srs"
          }
-      ],
-      "auto_detect_interface":true
-   }
+      ]
+   },
+   "outbounds":[
+      {
+         "type":"direct",
+         "tag":"direct"
+      }
+   ]
 }
