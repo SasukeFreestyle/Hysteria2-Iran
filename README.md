@@ -98,11 +98,11 @@ https://github.com/SagerNet/sing-box/tags
 در زمان نوشتن این متن، نسخه‌ی 1.6.0. موجود است. برای دانلود فایل tar.gz مناسب برای سیستم خود، معمولاً نسخه‌ی linux-amd64 مناسب است. برای دانلود آن، از دستور wget استفاده خواهیم کرد.
 
 ```
-wget https://github.com/SagerNet/sing-box/releases/download/v1.6.0/sing-box-1.6.0-linux-amd64.tar.gz
+wget https://github.com/SagerNet/sing-box/releases/download/v1.11.0/sing-box-1.11.0-linux-amd64.tar.gz
 ```
 از بایگانی tar.gz فایل Sing-box را استخراج کنید.
 ```
-tar -xzf sing-box-1.6.0-linux-amd64.tar.gz --strip-components=1 sing-box-1.6.0-linux-amd64/sing-box
+tar -xzf sing-box-1.11.0-linux-amd64.tar.gz --strip-components=1 sing-box-1.11.0-linux-amd64/sing-box
 ```
 کلیدهای OpenSSL را برای فایل پیکربندی ایجاد کنید. این فایل‌ها را بعداً استفاده می‌کنیم.
 ```
