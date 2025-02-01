@@ -14,6 +14,7 @@
          "tag":"hy2-in",
          "type":"hysteria2",
          "listen":"::",
+         "listen_port":443,
          "udp_timeout":180,
          "up_mbps":0,
          "down_mbps":0,
