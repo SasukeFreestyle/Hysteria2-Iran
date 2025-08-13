@@ -31,19 +31,18 @@
          "ignore_client_bandwidth":true,
          "tls":{
             "enabled":true,
-            "certificate_path":"/home/USERNAME/hy2/ca.crt",
-            "key_path":"/home/USERNAME/hy2/ca.key"
+            "certificate_path":"/home/USERNAME/sing/ca.crt",
+            "key_path":"/home/USERNAME/sing/ca.key"
          }
       }
    ],
    "dns":{
       "disable_cache":false,
+      "strategy":"prefer_ipv4",
       "servers":[
          {
-            "tag":"DNS",
-            "address":"local",
-            "address_strategy":"prefer_ipv4",
-            "detour":"direct"
+            "type":"local",
+            "tag":"DNS"
          }
       ]
    },
@@ -54,17 +53,26 @@
             "action":"sniff"
          },
          {
-            "action":"reject",
-            "protocol":[
-               "bittorrent",
-               "dtls"
-            ]
-         },
-         {
             "inbound":"hy2-in",
             "action":"resolve",
             "strategy":"prefer_ipv4",
             "server":"DNS"
+         },
+         {
+            "action":"hijack-dns",
+            "protocol":"dns"
+         },
+         {
+            "action":"hijack-dns",
+            "port":[
+               53
+            ]
+         },
+         {
+            "protocol":[
+               "quic"
+            ],
+            "action":"reject"
          },
          {
             "ip_is_private":true,
@@ -105,56 +113,56 @@
             "tag":"geoip-cn",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-cn.srs"
          },
          {
             "tag":"geoip-ir",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ir.srs"
          },
          {
             "tag":"geoip-ru",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-ru.srs"
          },
          {
             "tag":"geosite-ir",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://github.com/bootmortis/sing-geosite/releases/latest/download/geosite-ir.srs"
          },
          {
             "tag":"geoip-phishing",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-phishing.srs"
          },
          {
             "tag":"geosite-phishing",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-phishing.srs"
          },
          {
             "tag":"geoip-malware",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geoip-malware.srs"
          },
          {
             "tag":"geosite-malware",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-malware.srs"
          },
          {
@@ -168,7 +176,7 @@
             "tag":"geosite-cryptominers",
             "type":"remote",
             "format":"binary",
-            "update_interval":"3d",
+            "update_interval":"1d",
             "url":"https://raw.githubusercontent.com/Chocolate4U/Iran-sing-box-rules/rule-set/geosite-cryptominers.srs"
          }
       ]
@@ -176,7 +184,11 @@
    "outbounds":[
       {
          "type":"direct",
-         "tag":"direct"
+         "tag":"direct",
+         "domain_resolver":{
+            "server":"DNS",
+            "strategy":"prefer_ipv4"
+         }
       }
    ]
 }
